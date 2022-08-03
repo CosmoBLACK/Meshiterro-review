@@ -3,4 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :post_images, dependent: :destroy # Userが削除された時に、そのUserが投稿したPostImageが全て削除される
 end
