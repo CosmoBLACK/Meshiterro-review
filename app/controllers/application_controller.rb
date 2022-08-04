@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # deviseが用意しているメソッドで、サインイン後にどこに遷移するかを設定するメソッド
   def after_sign_in_path_for(resource)
-    about_path
+    post_images_path
   end
   # deviseが用意しているメソッドで、サインアウト後にどこに遷移するかを設定するメソッド
   def after_sign_out_path_for(resource)
