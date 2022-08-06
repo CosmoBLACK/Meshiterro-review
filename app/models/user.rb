@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  has_many :post_images, dependent: :destroy # Userが削除された時に、そのUserが投稿したPostImageが全て削除される
   has_one_attached :profile_image # ActiveStorageでプロフィール画像を保存できるように設定
 
   def get_profile_image(width, height)
@@ -11,7 +11,7 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed # 画像サイズの変更
+    profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  has_many :post_images, dependent: :destroy # Userが削除された時に、そのUserが投稿したPostImageが全て削除される
+
 end
