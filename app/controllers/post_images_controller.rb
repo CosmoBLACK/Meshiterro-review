@@ -2,7 +2,7 @@ class PostImagesController < ApplicationController
   def new
     @post_image = PostImage.new
   end
-  
+
   def create
     # 投稿するデータをPostImageモデルに紐づくデータとして保存する準備をしていて、フォームに入力されたデータが、@post_imageに格納される
     @post_image = PostImage.new(post_image_params)
@@ -13,22 +13,23 @@ class PostImagesController < ApplicationController
     @post_image.save
     redirect_to post_images_path
   end
-  
+
   def index
     @post_images = PostImage.all
   end
 
   def show
     @post_image = PostImage.find(params[:id])
+    @post_comment = PostComment.new
   end
-  
+
   def destroy
     #  削除するPostImageレコードを取得
     @post_image = PostImage.find(params[:id])
     @post_image.destroy
     redirect_to post_images_path
   end
-  
+
   private
   # フォームで入力されたデータが、投稿データとして許可されているパラメータかどうかをチェックする
   def post_image_params
