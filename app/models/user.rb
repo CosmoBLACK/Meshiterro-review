@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :post_images, dependent: :destroy # Userが削除された時に、そのUserが投稿したPostImageが全て削除される
   has_one_attached :profile_image # ActiveStorageでプロフィール画像を保存できるように設定
+  has_many :post_comments, dependent: :destroy
 
   def get_profile_image(width, height)
     unless profile_image.attached?
