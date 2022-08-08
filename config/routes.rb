@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   # コメントは、投稿画像に対してなされるため、post_commentsは、post_imagesに結びつき、以下のような親子関係になる
   # params[:post_image_id]でPostImageのidが取得できるようになる
   resources :post_images, only: [:new, :index, :show, :create, :destroy] do
-    resources :post_comments, only: [:create]
+    resources :post_comments, only: [:create, :destroy]
   end
-  
+
   resources :users, only: [:show, :edit, :update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
