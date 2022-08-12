@@ -10,8 +10,11 @@ class PostImagesController < ApplicationController
     # @post_image(投稿データ)のuser_idを、current_user.id(今ログインしているユーザーのID)に指定することで投稿データに、今ログイン中のユーザーのIDを持たせることができる
     @post_image.user_id = current_user.id
     # PostImageモデルへ保存した後、投稿一覧画面へリダイレクト
-    @post_image.save
-    redirect_to post_images_path
+    if @post_image.save
+      redirect_to post_images_path
+    else
+      render :new
+    end
   end
 
   def index
